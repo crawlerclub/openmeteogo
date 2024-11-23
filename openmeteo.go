@@ -16,14 +16,17 @@ const (
 	Version = "0.3.0"
 
 	defaultWeatherBaseURL    = "https://api.open-meteo.com/v1/"
+	defaultHistoricalBaseURL = "https://archive-api.open-meteo.com/v1/"
 	defaultAirQualityBaseURL = "https://air-quality-api.open-meteo.com/v1/"
 	defaultUserAgent         = "openmeteo-go" + "/" + Version
 	defaultForecast          = "forecast"
+	defaultArchive           = "archive"
 )
 
 type Client struct {
 	client            *http.Client
 	WeatherBaseURL    *url.URL
+	HistoricalBaseURL *url.URL
 	AirQualityBaseURL *url.URL
 
 	UserAgent string
@@ -31,6 +34,7 @@ type Client struct {
 	CurrentWeather    *CurrentWeatherService
 	DailyWeather      *DailyWeatherService
 	HourlyWeather     *HourlyWeatherService
+	HistoricalWeather *HistoricalWeatherService
 	HourlyAirQuality  *HourlyAirQualityService
 	CurrentAirQuality *CurrentAirQualityService
 
@@ -97,6 +101,10 @@ func (c *Client) initialize() {
 		c.WeatherBaseURL, _ = url.Parse(defaultWeatherBaseURL)
 	}
 
+	if c.HistoricalBaseURL == nil {
+		c.HistoricalBaseURL, _ = url.Parse(defaultHistoricalBaseURL)
+	}
+
 	if c.AirQualityBaseURL == nil {
 		c.AirQualityBaseURL, _ = url.Parse(defaultAirQualityBaseURL)
 	}
@@ -112,6 +120,7 @@ func (c *Client) initialize() {
 	c.DailyWeather = (*DailyWeatherService)(&c.common)
 	c.HourlyAirQuality = (*HourlyAirQualityService)(&c.common)
 	c.CurrentAirQuality = (*CurrentAirQualityService)(&c.common)
+	c.HistoricalWeather = (*HistoricalWeatherService)(&c.common)
 }
 
 func (client *Client) NewRequest(method string, url *url.URL, ref string, body interface{}, opts ...RequestOption) (*http.Request, error) {
