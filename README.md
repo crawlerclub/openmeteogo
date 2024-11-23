@@ -2,10 +2,12 @@
 
 Openmeteogo is a Go library to retrieve meteo data from [open-meteo.com](https://open-meteo.com).
 
+Forked from [https://github.com/ophusdev/openmeteogo](https://github.com/ophusdev/openmeteogo)
+
 ## Installation
 
 ```bash
-go get github.com/ophusdev/openmeteogo
+go get github.com/crawlerclub/openmeteogo
 ```
 
 ## Usage
@@ -22,7 +24,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ophusdev/openmeteogo"
+	"github.com/crawlerclub/openmeteogo"
 )
 
 func main() {
@@ -161,7 +163,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ophusdev/openmeteogo"
+	"github.com/crawlerclub/openmeteogo"
 )
 
 func main() {

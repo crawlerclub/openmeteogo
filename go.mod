@@ -1,4 +1,4 @@
-module github.com/ophusdev/openmeteogo
+module github.com/crawlerclub/openmeteogo
 
 go 1.22.2
 
